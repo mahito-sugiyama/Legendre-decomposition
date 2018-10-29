@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     sfs.open(stat_file);
   }
 
-  cout << "> Reada database file \"" << input_file << "\":" << flush;
+  cout << "> Read a database file \"" << input_file << "\":" << endl << flush;
   Tensor X;
   ifstream ifs(input_file);
   if (!ifs) {
@@ -59,7 +59,6 @@ int main(int argc, char *argv[]) {
   readTensorFromCSV(X, num_mat, ifs);
   ifs.close();
 
-  cout << "end" << endl << flush;
   cout << "  Size: (" << X.front().size() << ", " << X.front().front().size() << ", " << X.size() << ")" << endl << flush;
   cout << "        (Note: this is treated as (" << X.size() << ", " << X.front().size() << ", " << X.front().front().size() << ") inside the implementation)" << endl << flush;
 
@@ -88,10 +87,10 @@ int main(int argc, char *argv[]) {
     type = 2;
   }
 
-  Int num_constraint;
+  Int num_param;
   // run Legendre decomposition
   auto ts = system_clock::now();
-  double step = LegendreDecomposition(X, core_size, error_tol, rep_max, &num_constraint, verbose, type, const_type);
+  double step = LegendreDecomposition(X, core_size, error_tol, rep_max, verbose, type, const_type, &num_param);
   auto te = system_clock::now();
   auto dur = te - ts;
 
@@ -108,7 +107,7 @@ int main(int argc, char *argv[]) {
     ofs.close();
   }
   if (flag_stat) {
-    sfs << "Number_of_constraint:\t" << num_constraint << endl;
+    sfs << "Number_of_constraint:\t" << num_param << endl;
     sfs << "Number_of_iterations:\t" << step << endl;
     sfs << "Running_time_(sec):\t" << duration_cast<microseconds>(dur).count() / 1000000.0 << endl;
     sfs << "RMSE:\t" << rmse << endl;

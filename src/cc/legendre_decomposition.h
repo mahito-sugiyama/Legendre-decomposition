@@ -395,9 +395,9 @@ void initialize(Poset& S) {
   computeEta(S);
 }
 
-// ===================================== //
-// ========== Natual gradient ========== //
-// ===================================== //
+// ====================================== //
+// ========== Natural gradient ========== //
+// ====================================== //
 void eProject(Poset& S, vector<pair<tuple<Int, Int, Int>, double>>& beta) {
   Int S_size = 0;
   for (auto&& mat : S) {
@@ -478,7 +478,7 @@ double computeRMSE(Tensor& X, Tensor& Y) {
 }
 
 // the main function for Legendre decomposition by natural gradient
-double LegendreDecomposition(Tensor& X, Int core_size, double error_tol, double rep_max, Int *num_constraint, bool verbose, Int type, Int const_type) {
+double LegendreDecomposition(Tensor& X, Int core_size, double error_tol, double rep_max, bool verbose, Int type, Int const_type, Int *num_param) {
   Int n1 = X.size();
   Int n2 = X.front().size();
   Int n3 = X.front().front().size();
@@ -502,7 +502,7 @@ double LegendreDecomposition(Tensor& X, Int core_size, double error_tol, double 
   }
   initialize(S);
   cout << "  Number of parameters: " << beta.size() << endl << flush;
-  *num_constraint = beta.size();
+  *num_param = beta.size();
 
   // run Legendre deomposition
   if (verbose) cout << "----- Start Legendre decomposition -----" << endl << flush;
