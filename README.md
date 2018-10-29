@@ -1,6 +1,6 @@
 # Legendre Decomposition for Tensors
 An implementation of Legendre decomposition for tensors, which decomposes a given nonnegative tensor into a multiplicative combination of parameters.
-Current implementation supports only third order tensors.
+Current implementation supports only third order tensors and zero or nonnegative values are directly ignored.
 Please see the following paper for more details:
 * Sugiyama, M., Nakahara, H., Tsuda, K.: **Legendre Decomposition for Tensors**, NIPS 2018 (to appear).
 
